@@ -1,0 +1,21 @@
+<!--index.wxml-->
+<view class="container">
+  <view style="flex-direction:row;">
+    <button style="flex" bindtap='submit'>选择题库</button>
+    <button bindtap='submit'>重新开始</button>
+    <button bindtap='submit'>提交</button>
+  </view>
+  <scroll-view scroll-y style="height: 600rpx;">
+    <view class="question" style=' background-color: {{question.color}}' wx:for="{{judgments}}" wx:for-item="question" wx:key="id">
+      <label wx:if="{{submit}}" value="{{question.answers}}">第{{question.id+1}}题 {{question.topic}}(答案:{{question.answers}})</label>
+      <label wx:else value="{{question.answers}}">第{{question.id+1}}题 {{question.topic}}</label>
+      <radio-group bindchange="radioChange">
+        <block wx:for="{{question.selects}}">
+          <radio class="selects" value="{{question.id}}|{{index}}">{{item}}</radio>
+        </block>
+      </radio-group>
+    </view>
+  </scroll-view>
+
+  <label>{{test}}</label>
+</view>

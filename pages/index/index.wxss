@@ -1,0 +1,11 @@
+/**index.wxss**/
+
+.question {
+  margin-left: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.selects {
+  display: flex;
+}
+
