@@ -1,12 +1,12 @@
 <!--index.wxml-->
 <view class="container">
-  <view style="flex-direction:row;">
-    <button style="flex" bindtap='submit'>选择题库</button>
-    <button bindtap='submit'>重新开始</button>
-    <button bindtap='submit'>提交</button>
+  <view style="display:flex;flex-direction:row;">
+    <button size='mini'>选择题库</button>
+    <button size='mini' bindtap='reload'>重新开始</button>
+    <button type='primary' size='mini' bindtap='submit'>提交</button>
   </view>
-  <scroll-view scroll-y style="height: 600rpx;">
-    <view class="question" style=' background-color: {{question.color}}' wx:for="{{judgments}}" wx:for-item="question" wx:key="id">
+  <scroll-view scroll-y style="height: 1100rpx;">
+    <view class="question" style=' background-color: {{question.color}}' wx:for="{{exam}}" wx:for-item="question" wx:key="id">
       <label wx:if="{{submit}}" value="{{question.answers}}">第{{question.id+1}}题 {{question.topic}}(答案:{{question.answers}})</label>
       <label wx:else value="{{question.answers}}">第{{question.id+1}}题 {{question.topic}}</label>
       <radio-group bindchange="radioChange">
@@ -16,6 +16,4 @@
       </radio-group>
     </view>
   </scroll-view>
-
-  <label>{{test}}</label>
 </view>
