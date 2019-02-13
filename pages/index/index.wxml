@@ -1,19 +1,37 @@
 <!--index.wxml-->
 <view class="container">
+  <picker bindchange='bindPickerChange' value="{{BankIndex}}" range="{{Banks}}" range-key="name">当前选择题库:{{Banks[BankIndex].name}}</picker>
   <view style="display:flex;flex-direction:row;">
-    <button size='mini'>选择题库</button>
     <button size='mini' bindtap='reload'>重新开始</button>
     <button type='primary' size='mini' bindtap='submit'>提交</button>
   </view>
-  <scroll-view scroll-y style="height: 1100rpx;">
-    <view class="question" style=' background-color: {{question.color}}' wx:for="{{exam}}" wx:for-item="question" wx:key="id">
+  <scroll-view scroll-y style="height: 1000rpx;">
+    <view class="question" style=' background-color: {{question.color}}' wx:for="{{exam.judgments}}" wx:for-item="question" wx:key="id">
       <label wx:if="{{submit}}" value="{{question.answers}}">第{{question.id+1}}题 {{question.topic}}(答案:{{question.answers}})</label>
       <label wx:else value="{{question.answers}}">第{{question.id+1}}题 {{question.topic}}</label>
       <radio-group bindchange="radioChange">
         <block wx:for="{{question.selects}}">
-          <radio class="selects" value="{{question.id}}|{{index}}">{{item}}</radio>
+          <radio class="selects" value="{{question.typeIndex}}|{{index}}|judgments">{{item}}</radio>
         </block>
       </radio-group>
+    </view>
+    <view class="question" style=' background-color: {{question.color}}' wx:for="{{exam.singles}}" wx:for-item="question" wx:key="id">
+      <label wx:if="{{submit}}" value="{{question.answers}}">第{{question.id+1}}题 {{question.topic}}(答案:{{question.answers}})</label>
+      <label wx:else value="{{question.answers}}">第{{question.id+1}}题 {{question.topic}}</label>
+      <radio-group bindchange="radioChange">
+        <block wx:for="{{question.selects}}">
+          <radio class="selects" value="{{question.typeIndex}}|{{index}}|singles">{{item}}</radio>
+        </block>
+      </radio-group>
+    </view>
+    <view class="question" style=' background-color: {{question.color}}' wx:for="{{exam.multi}}" wx:for-item="question" wx:key="id">
+      <label wx:if="{{submit}}" value="{{question.answers}}">第{{question.id+1}}题 {{question.topic}}(答案:{{question.answers}})</label>
+      <label wx:else value="{{question.answers}}">第{{question.id+1}}题 {{question.topic}}</label>
+      <checkbox-group bindchange="checkboxChange" data-typeindex='{{question.typeIndex}}' data-type='multi'>
+        <block wx:for="{{question.selects}}">
+          <checkbox class="selects" value="{{question.typeIndex}}|{{index}}|multi">{{item}}</checkbox>
+        </block>
+      </checkbox-group>
     </view>
   </scroll-view>
 </view>

@@ -8,5 +8,8 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "模拟考试",
     "navigationBarTextStyle":"black"
+  },
+  "networkTimeout":{
+    "request":5000
   }
 }
